@@ -41,7 +41,7 @@ Burp-UI is now accessible at `http://your-server-ip:5000`. Default username and 
 ```
 docker-compose up -d
 ```
-Burp-UI is now accessible at `http://your-server-ip:5000`. Password for admin user is the one you defined in `BUI_USER_PASSWORD` variable.
+Burp-UI is now accessible at `http://your-server-ip:5000`. Password for admin user is the one you defined in `WEBUI_ADMIN_PASSWORD` variable.
 
 #### Variables
 
