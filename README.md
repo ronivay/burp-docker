@@ -46,28 +46,51 @@ Burp-UI is now accessible at `http://your-server-ip:5000`. Password for admin us
 #### Variables
 
 `NOTIFY_SUCCESS` 
+
 Boolean value true/false for receiving notifications on successfull backups via email. 
+
 `NOTIFY_FAILURE`
+
 Boolean value true/false for receiving notification on failed backups via email.
+
 `NOTIFY_EMAIL`
+
 Email address where notifications are sent to
+
 `REDIS`
+
 Boolean value true/false for using redis or not. Mainly designed to work with docker-compose
+
 `MYSQL`
+
 Boolean value true/false for using mysql or not. Mainly designed to work with docker-compose
+
 `MYSQL_USER`
+
 Username for connecting to mysql server
+
 `MYSQL_DATABASE`
+
 Mysql database to use
+
 `MYSQL_PASSWORD`
+
 Mysql password to use
+
 `RESTOREPATH`
+
 Path where restored files via burp-ui are stored. Slashes need to be escaped in this, example: `\/tmp\/bui`
+
 `BUI_USER`
+
 Username which burp-ui uses to interact with the server
+
 `BUI_USER_PASSWORD`
+
 BUI_USER password for burp-ui to interact with the server
+
 `WEBUI_ADMIN_PASSWORD`
+
 burp-ui admin user password. 
 
 #### Volumes
