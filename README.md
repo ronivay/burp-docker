@@ -5,7 +5,7 @@ This repository contains files to build burp container which includes burp-ui an
 Burp is an open source backup and restore software for Unix and Windows clients.
 https://burp.grke.org/
 
-Burp-UI is a great project wich applies a graphical user interface to interact with the server, edit settings and manage clients.
+Burp-UI is a great project which applies a graphical user interface to interact with the server, edit settings and manage clients.
 https://github.com/ziirish/burp-ui
 
 #### Installation
@@ -95,7 +95,7 @@ burp-ui admin user password.
 
 #### Volumes
 
-There are few important mountpoints you should note if preserving data is important.
+There are few important mountpoints you should note if preserving data is important (usually it is unless you're not just testing this).
 
 `/etc/burp` - configuration path
 
@@ -107,11 +107,11 @@ You should mount a path from host machine to these for best outcome.
 
 #### Tips
 
-- Each restart copies /etc/burp/burp-server.conf.template as /etc/burp/burp-server.conf and edits it according to variables set. If you wish to add or edit some configuration which is not supported by my build, you can edit the template file to preserve things in the future. 
+- Each restart copies /etc/burp/burp-server.conf.template as /etc/burp/burp-server.conf and edits it according to variables set. If you wish to add or edit some configuration which is not supported by my build, you can edit the template file inside the container/host mountpoint to preserve things in the future. 
 
 - /etc/burp/burp.conf is generated only if /etc/burp/clientconfdir/${BUI_USER} file doesn't exist, so you can also edit that if you wish.
 
-- /etc/burp/burpui.cfg is copied from the package provided template on every restart, so it's currently not possible to edit it outside what variables provide.
+- /etc/burp/burpui.cfg is copied from the burp-ui python package provided template on every restart, so it's currently not possible to edit it outside what variables provide.
 
 
 
