@@ -98,7 +98,9 @@ burp-ui admin user password.
 There are few important mountpoints you should note if preserving data is important.
 
 `/etc/burp` - configuration path
+
 `/var/spool/burp` - path for backup store
+
 `/tmp/bui` - default path for restored files when done from burp-ui
 
 You should mount a path from host machine to these for best outcome.
@@ -107,7 +109,7 @@ You should mount a path from host machine to these for best outcome.
 
 - Each restart copies /etc/burp/burp-server.conf.template as /etc/burp/burp-server.conf and edits it according to variables set. If you wish to add or edit some configuration which is not supported by my build, you can edit the template file to preserve things in the future. 
 
-- /etc/burp/burp.conf is generated only if /etc/clientconfdir/${BUI_USER} file doesn't exist, so you can also edit that if you wish.
+- /etc/burp/burp.conf is generated only if /etc/burp/clientconfdir/${BUI_USER} file doesn't exist, so you can also edit that if you wish.
 
 - /etc/burp/burpui.cfg is copied from the package provided template on every restart, so it's currently not possible to edit it outside what variables provide.
 
