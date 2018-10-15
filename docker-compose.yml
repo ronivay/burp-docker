@@ -23,7 +23,8 @@ services:
 
   burp-server:
     image: burp-server
-    hostname: burp.yawn.fi
+    # emails are sent from this hostname
+    hostname: burp.domain.tld
     environment:
       TZ: 'Europe/Helsinki'
       NOTIFY_SUCCESS: 'true'
