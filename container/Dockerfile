@@ -25,8 +25,6 @@ RUN pip install "burp-ui[gunicorn]"
 RUN pip install "burp-ui[gunicorn-extra]"
 RUN pip install "burp-ui[celery]"
 
-RUN ln -sfn /usr/share/zoneinfo/Europe/Helsinki /etc/localtime
-
 RUN ln -s /proc/1/fd/1 /var/log/burp.log
 RUN ln -s /proc/1/fd/1 /var/log/burp-ui.log
 ADD monit-services /etc/monit.d/services
