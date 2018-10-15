@@ -1,0 +1,55 @@
+version: '3.4'
+
+services:
+  mysql-server:
+    image: mysql:5.6
+    restart: always
+    environment:
+      TZ: 'Europe/Helsinki'
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+      MYSQL_USER: 'burpui'
+      MYSQL_DATABASE: 'burpui'
+      MYSQL_PASSWORD: 'mysqlpasswd'
+    volumes:
+      - ./burp-server/mysql:/var/lib/mysql
+
+  redis-server:
+    image: redis
+    restart: always
+    environment:
+      TZ: 'Europe/Helsinki'
+    volumes:
+      - ./burp-server/redis:/data
+
+  burp-server:
+    image: burp-server
+    hostname: burp.yawn.fi
+    environment:
+      TZ: 'Europe/Helsinki'
+      NOTIFY_SUCCESS: 'true'
+      NOTIFY_FAILURE: 'true'
+      NOTIFY_EMAIL: 'youremail@example.com'
+      REDIS: 'true'
+      MYSQL: 'true'
+      MYSQL_USER: 'burpui'
+      MYSQL_DATABASE: 'burpui'
+      MYSQL_PASSWORD: 'mysqlpasswd'
+      # restorepath needs to have slashes escaped
+      RESTOREPATH: '\/tmp\/bui'
+      BUI_USER: 'bui'
+      BUI_USER_PASSWORD: 'buipasswd'
+      WEBUI_ADMIN_PASSWORD: 'admin'
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    ports:
+      - "4971:4971"
+      - "4972:4972"
+      - "5000:5000"
+    volumes:
+      - ./burp-server/conf:/etc/burp
+      - ./burp-server/backups:/var/spool/burp
+      - ./burp-server/restore:/var/spool/restore
+    links:
+      - mysql-server
+      - redis-server

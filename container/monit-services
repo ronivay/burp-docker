@@ -1,0 +1,14 @@
+set init
+
+check process burp-server with pidfile /run/burp.server.pid
+	start program = "/root/burp.sh burp start"
+	stop program = "/root/burp.sh burp stop"
+
+check process burp-ui with pidfile /run/burp-ui.pid
+	start program = "/root/burp.sh burp-ui start"
+	stop program = "/root/burp.sh burp-ui stop"
+
+check process postfix with pidfile /var/spool/postfix/pid/master.pid
+	start program = "/usr/sbin/postfix start"
+	stop program = "/usr/sbin/postfix stop"
+
