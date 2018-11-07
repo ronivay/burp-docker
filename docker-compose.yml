@@ -31,6 +31,7 @@ services:
       NOTIFY_FAILURE: 'true'
       NOTIFY_EMAIL: 'youremail@example.com'
       REDIS: 'true'
+      REDIS_SERVER: 'redis-server:6379'
       MYSQL: 'true'
       MYSQL_USER: 'burpui'
       MYSQL_DATABASE: 'burpui'

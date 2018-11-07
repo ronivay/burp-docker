@@ -108,7 +108,7 @@ if [[ $REDIS == "true" ]]; then
 	sed -i 's/^storage = default/storage = redis/' /etc/burp/burpui.cfg
 	sed -i 's/^session = default/session = redis/' /etc/burp/burpui.cfg
 	sed -i 's/^cache = default/cache = redis/' /etc/burp/burpui.cfg
-	sed -i 's/^redis = localhost:6379/redis = redis-server:6379/' /etc/burp/burpui.cfg
+	sed -i "s/^redis = localhost:6379/redis = ${REDIS_SERVER}/" /etc/burp/burpui.cfg
 fi
 
 if [[ $MYSQL == "true" ]]; then

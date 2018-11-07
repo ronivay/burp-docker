@@ -31,12 +31,14 @@ docker pull ronivay/burp-docker
 - run it with defaults values for testing purposes. 
 
 ```
-docker run -itd -p 5000:5000 burp-docker
+docker run -itd -p 5000:5000 -p 4971:4971 -p 4972:4972 burp-docker
 ```
 
 Burp-UI is now accessible at `http://your-server-ip:5000`. Default username and password admin/admin
 
-- Suggested method is to use the provided docker-compose file. Edit the variables to your preference and start up the environment
+You can leave ports 4971 and 4972 out if you just want to try the UI.
+
+- Other than testing, suggested method is to use the provided docker-compose file. Edit the variables to your preference and start up the environment
 
 ```
 docker-compose up -d
@@ -60,6 +62,10 @@ Email address where notifications are sent to
 `REDIS`
 
 Boolean value true/false for using redis or not. Mainly designed to work with docker-compose
+
+`REDIS_SERVER`
+
+Redis server and port to connect to. Should be set as redis-server:port
 
 `MYSQL`
 

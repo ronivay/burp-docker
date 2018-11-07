@@ -17,6 +17,7 @@ RUN cd /etc/burp-source && ./configure --prefix=/usr --sysconfdir=/etc/burp --lo
 RUN cd /etc/burp-source && make
 RUN cd /etc/burp-source && make install
 RUN cd /etc/burp-source && make install-configs
+RUN cp /etc/burp/burp-server.conf /etc/burp/burp-server.conf.template
 
 RUN pip install --upgrade burp-ui
 RUN pip install "burp-ui[sql]"
