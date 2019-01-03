@@ -31,6 +31,9 @@ RUN ln -s /proc/1/fd/1 /var/log/burp-ui.log
 ADD monit-services /etc/monit.d/services
 ADD burp.sh /root/burp.sh
 RUN chmod +x /root/burp.sh
+ADD healthcheck.sh /healthcheck.sh
+RUN chmod +x /healtcheck.sh
+HEALTHCHECK --start-period=1m --interval=30s --timeout=5s --retries=2 CMD /healtcheck.sh
 
 EXPOSE 4971
 EXPOSE 4972
