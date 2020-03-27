@@ -67,8 +67,6 @@ SMTP relay server address. Optional and postfix inside container will send email
 
 Optional SMTP relay port number when SMTP_RELAY is set. Defaults to 25 if not set
 
-Use format smtp.server.tld:port
-
 `SMTP_AUTH`
 
 Optional username/password when SMTP_RELAY is set.
