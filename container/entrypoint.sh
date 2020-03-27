@@ -7,10 +7,25 @@ BUI_USER_PASSWORD=${BUI_USER_PASSWORD:-password}
 WEBUI_ADMIN_PASSWORD=${WEBUI_ADMIN_PASSWORD:-admin}
 RESTOREPATH=${RESTOREPATH:-\/tmp\/bui}
 NOTIFY_EMAIL=${NOTIFY_EMAIL:-youremail@example.com}
+SMTP_PORT=${SMTP_PORT:-25}
 
-# fix postfix configuration
-sed -i 's/^inet_protocols = all/inet_protocols = ipv4/' /etc/postfix/main.cf
-sed -i 's/^inet_interfaces = localhost/#inet_interfaces = localhost/' /etc/postfix/main.cf
+# configure postfix
+postconf -e 'inet_protocols = ipv4'
+postconf -e 'inet_interfaces = all'
+
+if [[ $SMTP_RELAY ]] && [[ ! -z $SMTP_RELAY ]]; then
+	postconf -e "relayhost = [${SMTP_RELAY}]:$SMTP_PORT"
+	if [[ $SMTP_AUTH ]] && [[ ! -z $SMTP_AUTH ]]; then
+		postconf -e "smtp_sasl_auth_enable = yes"
+		postconf -e "smtp_sasl_password_maps = hash:/etc/postix/sasl_passwd"
+		postconf -e "smtp_sasl_security_options = noanonymous"
+                echo "[${SMTP_RELAY]:${SMTP_PORT} $SMTP_AUTH" > /etc/postfix/sasl_passwd
+                postmap	/etc/postfix/sasl_passwd
+	fi
+	if [[ $SMTP_TLS == "yes" ]]; then
+		postconf -e "smtp_use_tls = yes"
+	fi
+fi
 
 if [[ -z $(ls -A /etc/burp) ]]; then
 	cd /etc/burp-source && make install-configs
@@ -19,11 +34,11 @@ fi
 
 # start with clean config files
 cp -f /etc/burp/burp-server.conf.template /etc/burp/burp-server.conf
-cp -f /usr/share/burpui/etc/burpui.sample.cfg /etc/burp/burpui.cfg
-cp -f /usr/share/burpui/contrib/gunicorn/burpui_gunicorn.py /etc/burp/burpui_gunicorn.py
+cp -f /usr/local/share/burpui/etc/burpui.sample.cfg /etc/burp/burpui.cfg
+cp -f /usr/local/share/burpui/contrib/gunicorn/burpui_gunicorn.py /etc/burp/burpui_gunicorn.py
 
 ## fix for clients not showing in the UI. Will be fixed in burp-ui v0.7
-sed -i "s/self.burpbin, '-v'/self.burpbin, '-V'/" /usr/lib/python2.7/site-packages/burpui/misc/backend/burp2.py
+sed -i "s/self.burpbin, '-v'/self.burpbin, '-V'/" /usr/local/lib/python3.6/site-packages/burpui/misc/backend/burp2.py
 
 # enable listen_status port in burp server
 sed -i 's/^#listen_status = 127.0.0.1:4972/listen_status = 0.0.0.0:4972/' /etc/burp/burp-server.conf
@@ -117,12 +132,12 @@ fi
 
 # fix gunicorn configuration
 
+mkdir -p /var/log/burp-ui 2>/dev/null
 sed -i "s/^daemon = False/daemon = True/" /etc/burp/burpui_gunicorn.py
 sed -i "s/^pidfile = None/pidfile = '\/var\/run\/burp-ui.pid'/" /etc/burp/burpui_gunicorn.py
-sed -i "s/^umask = 0/umask = 0022/" /etc/burp/burpui_gunicorn.py
 sed -i "s/^user = 'burpui'/user = 'root'/" /etc/burp/burpui_gunicorn.py
 sed -i "s/^group = 'burpui'/group = 'root'/" /etc/burp/burpui_gunicorn.py
-sed -i "s/^errorlog = '\/var\/log\/gunicorn\/burp-ui_error.log'/errorlor = '\/var\/log\/burp-ui.log'/" /etc/burp/burpui_gunicorn.py
-sed -i "s/^accesslog = '\/var\/log\/gunicorn\/burp-ui_access.log'/accesslog = '\/var\/log\/burp-ui.log'/" /etc/burp/burpui_gunicorn.py
+sed -i "s/^errorlog = '\/var\/log\/gunicorn\/burp-ui_error.log'/errorlor = '\/var\/log\/burp-ui\/burp-ui.log'/" /etc/burp/burpui_gunicorn.py
+sed -i "s/^accesslog = '\/var\/log\/gunicorn\/burp-ui_access.log'/accesslog = '\/var\/log\/burp-ui\/burp-ui.log'/" /etc/burp/burpui_gunicorn.py
 
 /usr/bin/monit

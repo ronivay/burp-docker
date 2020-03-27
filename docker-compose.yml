@@ -30,6 +30,10 @@ services:
       NOTIFY_SUCCESS: 'true'
       NOTIFY_FAILURE: 'true'
       NOTIFY_EMAIL: 'youremail@example.com'
+      #SMTP_RELAY: 'smtp.domain.tld'
+      #SMTP_PORT: '587'
+      #SMTP_AUTH: 'username:password'
+      #SMTP_TLS: 'yes'
       REDIS: 'true'
       REDIS_SERVER: 'redis-server:6379'
       MYSQL: 'true'
@@ -52,6 +56,7 @@ services:
       - ./burp-server/conf:/etc/burp
       - ./burp-server/backups:/var/spool/burp
       - ./burp-server/restore:/var/spool/restore
+      - ./burp-server/logs:/var/log/burp-ui
     links:
       - mysql-server
       - redis-server

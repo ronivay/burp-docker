@@ -17,7 +17,7 @@ function Burp {
 
 function BurpUI {
 	if [ "$1" == "start" ]; then
-		gunicorn -c /etc/burp/burpui_gunicorn.py 'burpui:create_app(conf="/etc/burp/burpui.cfg",logfile="/var/log/burp-ui.log")'
+		gunicorn -c /etc/burp/burpui_gunicorn.py 'burpui:create_app(conf="/etc/burp/burpui.cfg",logfile="/var/log/burp-ui/burp-ui.log")'
 	elif [ "$1" == "stop" ]; then
 		kill $(cat /var/run/burp-ui.pid)
 	else

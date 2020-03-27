@@ -1,13 +1,13 @@
-FROM centos:latest
+FROM centos:7
 
 MAINTAINER Roni Väyrynen <roni@vayrynen.info>
 
 RUN yum -y install epel-release
 RUN yum install -y make gcc gcc-c++ bzip2 pkgconfig \
         librsync-devel libzip-devel openssl-devel uthash-devel \
-        libacl-devel ncurses-devel openssl-perl python-devel \
+        libacl-devel ncurses-devel openssl-perl python36-devel \
         autoconf automake libtool python-pip libffi libffi-devel \
-        git postfix mysql-devel monit
+        git postfix mysql-devel monit cyrus-sasl-plain
 
 RUN mkdir /etc/burp-source
 RUN git clone https://github.com/grke/burp /etc/burp-source
@@ -19,12 +19,11 @@ RUN cd /etc/burp-source && make install
 RUN cd /etc/burp-source && make install-configs
 RUN cp /etc/burp/burp-server.conf /etc/burp/burp-server.conf.template
 
-RUN pip install --upgrade burp-ui
-RUN pip install "burp-ui[sql]"
-RUN pip install mysqlclient
-RUN pip install "burp-ui[gunicorn]"
-RUN pip install "burp-ui[gunicorn-extra]"
-RUN pip install "burp-ui[celery]"
+RUN pip3 install burp-ui
+RUN pip3 install "burp-ui[sql]"
+RUN pip3 install mysqlclient
+RUN pip3 install "burp-ui[gunicorn]"
+RUN pip3 install "burp-ui[gunicorn-extra]"
 
 RUN ln -s /proc/1/fd/1 /var/log/burp.log
 RUN ln -s /proc/1/fd/1 /var/log/burp-ui.log

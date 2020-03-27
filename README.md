@@ -59,6 +59,26 @@ Boolean value true/false for receiving notification on failed backups via email.
 
 Email address where notifications are sent to
 
+`SMTP_RELAY`
+
+SMTP relay server address. Optional and postfix inside container will send emails directly if not defined.
+
+`SMTP_PORT`
+
+Optional SMTP relay port number when SMTP_RELAY is set. Defaults to 25 if not set
+
+Use format smtp.server.tld:port
+
+`SMTP_AUTH`
+
+Optional username/password when SMTP_RELAY is set.
+
+Use format username:password
+
+`SMTP_TLS`
+
+Boolean value yes/no for TLS when SMTP_RELAY is set. Defaults to no if not set
+
 `REDIS`
 
 Boolean value true/false for using redis or not. Mainly designed to work with docker-compose
@@ -108,6 +128,8 @@ There are few important mountpoints you should note if preserving data is import
 `/var/spool/burp` - path for backup store
 
 `/tmp/bui` - default path for restored files when done from burp-ui
+
+`/var/log/burp-ui` - burp-ui access/error logs are not redirected to container stdout. mount a volume from host if you want to see/preserve these logs
 
 You should mount a path from host machine to these for best outcome.
 
