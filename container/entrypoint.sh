@@ -116,6 +116,8 @@ fi
 
 if [[ $NOTIFY_SUCCESS == "true" ]]; then
 	sed -i '/^#notify_success/s/^#//g' /etc/burp/burp-server.conf
+	sed -i 's/^notify_success_warnings_only = 1/notify_success_warnings_only = 0/' /etc/burp/burp-server.conf
+	sed -i 's/^notify_success_changes_only = 1/notify_success_changes_only = 0/' /etc/burp/burp-server.conf
 	sed -i "s/youremail@example.com/${NOTIFY_EMAIL}/g" /etc/burp/burp-server.conf
 fi
 
