@@ -26,7 +26,6 @@ RUN pip3 install "burp-ui[gunicorn]"
 RUN pip3 install "burp-ui[gunicorn-extra]"
 
 RUN ln -s /proc/1/fd/1 /var/log/burp.log
-RUN ln -s /proc/1/fd/1 /var/log/burp-ui.log
 ADD monit-services /etc/monit.d/services
 ADD burp.sh /root/burp.sh
 RUN chmod +x /root/burp.sh

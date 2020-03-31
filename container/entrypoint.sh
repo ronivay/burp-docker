@@ -17,7 +17,7 @@ if [[ ${SMTP_RELAY} ]] && [[ ! -z ${SMTP_RELAY} ]]; then
 	postconf -e "relayhost = [${SMTP_RELAY}]:${SMTP_PORT}"
 	if [[ ${SMTP_AUTH} ]] && [[ ! -z ${SMTP_AUTH} ]]; then
 		postconf -e "smtp_sasl_auth_enable = yes"
-		postconf -e "smtp_sasl_password_maps = hash:/etc/postix/sasl_passwd"
+		postconf -e "smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd"
 		postconf -e "smtp_sasl_security_options = noanonymous"
                 echo "[${SMTP_RELAY}]:${SMTP_PORT} ${SMTP_AUTH}" > /etc/postfix/sasl_passwd
                 postmap /etc/postfix/sasl_passwd
