@@ -161,5 +161,5 @@ trap StopProcesses EXIT TERM
 # start monit and all monitored processes
 /usr/bin/monit && /usr/bin/monit start all
 
-# just infite loop
+# just infinite loop
 while true; do : ; done
