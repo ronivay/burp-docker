@@ -40,4 +40,4 @@ EXPOSE 5000
 ADD entrypoint.sh /root/entrypoint.sh
 RUN chmod +x /root/entrypoint.sh
 
-ENTRYPOINT ["/root/entrypoint.sh"]
+CMD ["/root/entrypoint.sh"]

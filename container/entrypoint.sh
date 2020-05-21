@@ -142,4 +142,24 @@ sed -i "s/^group = 'burpui'/group = 'root'/" /etc/burp/burpui_gunicorn.py
 sed -i "s/^errorlog = '\/var\/log\/gunicorn\/burp-ui_error.log'/errorlor = '\/var\/log\/burp-ui\/burp-ui.log'/" /etc/burp/burpui_gunicorn.py
 sed -i "s/^accesslog = '\/var\/log\/gunicorn\/burp-ui_access.log'/accesslog = '\/var\/log\/burp-ui\/burp-ui.log'/" /etc/burp/burpui_gunicorn.py
 
-/usr/bin/monit
+function StopProcesses {
+
+	while [ $(/usr/bin/monit status | sed -n '/^Process/{n;p;}' | awk '{print $2}' | grep -c OK) != 0 ] ; do
+		sleep 2
+		/usr/bin/monit stop all
+	done
+
+	exit 0
+}
+
+
+# start services
+
+# run StopProcesses function if docker stop is initiated
+trap StopProcesses EXIT TERM
+
+# start monit and all monitored processes
+/usr/bin/monit && /usr/bin/monit start all
+
+# just infite loop
+while true; do : ; done

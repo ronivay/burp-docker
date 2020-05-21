@@ -1,5 +1,3 @@
-set init
-
 check process burp-server with pidfile /run/burp.server.pid
 	start program = "/root/burp.sh burp start"
 	stop program = "/root/burp.sh burp stop"
