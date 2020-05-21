@@ -162,4 +162,9 @@ trap StopProcesses EXIT TERM
 /usr/bin/monit && /usr/bin/monit start all
 
 # just infinite loop
-while true; do : ; done
+while true
+do
+	sleep 1d
+done &
+
+wait $!
