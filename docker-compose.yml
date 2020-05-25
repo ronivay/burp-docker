@@ -4,6 +4,7 @@ services:
   mysql-server:
     image: mysql:5.6
     restart: always
+    stop_grace_period: 1m
     environment:
       TZ: 'Europe/Helsinki'
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
@@ -46,6 +47,7 @@ services:
       BUI_USER_PASSWORD: 'buipasswd'
       WEBUI_ADMIN_PASSWORD: 'admin'
     restart: unless-stopped
+    stop_grace_period: 1m
     stdin_open: true
     tty: true
     ports:
