@@ -79,7 +79,7 @@ Boolean value yes/no for TLS when SMTP_RELAY is set. Defaults to no if not set
 
 `REDIS`
 
-Boolean value true/false for using redis or not. Mainly designed to work with docker-compose
+Boolean value true/false for using redis or not
 
 `REDIS_SERVER`
 
@@ -87,7 +87,11 @@ Redis server and port to connect to. Should be set as redis-server:port
 
 `MYSQL`
 
-Boolean value true/false for using mysql or not. Mainly designed to work with docker-compose
+Boolean value true/false for using mysql or not
+
+`MYSQL_HOST`
+
+Mysql server hostname or ip-address
 
 `MYSQL_USER`
 

@@ -38,6 +38,7 @@ services:
       REDIS: 'true'
       REDIS_SERVER: 'redis-server:6379'
       MYSQL: 'true'
+      MYSQL_HOST: 'mysql-server'
       MYSQL_USER: 'burpui'
       MYSQL_DATABASE: 'burpui'
       MYSQL_PASSWORD: 'mysqlpasswd'
