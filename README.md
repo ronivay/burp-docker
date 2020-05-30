@@ -83,7 +83,11 @@ Boolean value true/false for using redis or not
 
 `REDIS_SERVER`
 
-Redis server and port to connect to. Should be set as redis-server:port
+Redis server hostname or ip-address
+
+`REDIS_PORT`
+
+Redis server port to connect to
 
 `MYSQL`
 
