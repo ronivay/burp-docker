@@ -81,7 +81,7 @@ Boolean value yes/no for TLS when SMTP_RELAY is set. Defaults to no if not set
 
 Boolean value true/false for using redis or not
 
-`REDIS_SERVER`
+`REDIS_HOST`
 
 Redis server hostname or ip-address
 

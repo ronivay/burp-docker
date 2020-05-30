@@ -36,7 +36,7 @@ services:
       #SMTP_AUTH: 'username:password'
       #SMTP_TLS: 'yes'
       REDIS: 'true'
-      REDIS_SERVER: 'redis-server'
+      REDIS_HOST: 'redis-server'
       REDIS_PORT: '6379'
       MYSQL: 'true'
       MYSQL_HOST: 'mysql-server'
