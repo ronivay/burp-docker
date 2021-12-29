@@ -19,6 +19,8 @@ RUN cd /etc/burp-source && make install
 RUN cd /etc/burp-source && make install-configs
 RUN cp /etc/burp/burp-server.conf /etc/burp/burp-server.conf.template
 
+RUN pip3 install setuptools-rust
+RUN pip3 install --upgrade pip
 RUN pip3 install burp-ui
 RUN pip3 install "burp-ui[sql]"
 RUN pip3 install mysqlclient

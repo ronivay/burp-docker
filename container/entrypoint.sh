@@ -129,7 +129,7 @@ if [[ $REDIS == "true" ]]; then
 fi
 
 if [[ $MYSQL == "true" ]]; then
-	sed -i "s/^database = none/database = mysql:\/\/${MYSQL_USER}:${MYSQL_PASSWORD}@${MYSQL-HOST}\/${MYSQL_DATABASE}/" /etc/burp/burpui.cfg
+	sed -i "s/^database = none/database = mysql:\/\/${MYSQL_USER}:${MYSQL_PASSWORD}@${MYSQL_HOST}\/${MYSQL_DATABASE}/" /etc/burp/burpui.cfg
 fi
 
 # fix gunicorn configuration
